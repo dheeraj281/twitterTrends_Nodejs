@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <meta charset="utf-8">
+	  <title>Find popular hashtags on Twitter </title>
+	  <link href="https://fonts.googleapis.com/css?family=Montserrat:black|Ubuntu" rel="stylesheet">
+	 <script src="https://use.fontawesome.com/51f0d73542.js"></script>
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	 <link rel="stylesheet" href="css/styles.css">
+	</head>
+	<body >
+		<section id="title">
+			<div class="container-fluid">
+				<h1> Find Popular #Hashtags By City or Country  </h1>
+				<p> Please enter the country or the city name in the box below and submit.</p>
+				<form class="form-inline place-name" action="/" method="POST">
+				  <div class="input-field form-group mb-2">
+					<label for="staticEmail2" class="sr-only">Email</label>
+					<input class="text-box" type="text"  name="placeName" class="form-control"  placeholder ="Enter any city or country name">
+				  </div>
+				  <button type="submit" class="btn download-button btn-warning btn-primary mb-2">Submit</button>
+				</form>  
+			  
+            </div> 
+		</section>
+	    <section id="results">
+			<div class="container-fluid">
+				<% if (trends.length > 0) { %>
+					<h2> <i class="fa icon-cog fa-twitter" aria-hidden="true"></i> Below are the most popular #hastags on Twitter today </h2>
+						<table class="table">
+							  <thead class="thead-dark">
+								<tr>
+								  <th scope="col">#</th>
+								  <th scope="col">Hashtag</th>
+								  <th scope="col">No. of Tweets </th>
+								  <th scope="col"></th>
+								</tr>
+							  </thead>
+							  <tbody>
+								<% for (i=0;i<trends.length; i++){ %>
+									<tr>
+									  <th scope="row"><%= i+1 %></th>
+									  <td><%= trends[i].trend_name %></td>
+									  <td><%= trends[i].tweetcount %> </td>
+									  <td> <a href="https://twitter.com/intent/tweet?button_hashtag=<%= trends[i].trend_name %>&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></td>
+									  
+									</tr>
+								<% } %>		
+							  </tbody>
+						</table>						   
+				<% } %>	
+				<div class="alert alert-danger <%= add_class %>" role="alert">
+					 Oops! This seems to be an invalid place name. Please try again.
+				</div>
+           	</div>		
+		</section>
+	</body>
+</html>
